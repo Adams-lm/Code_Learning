@@ -14,5 +14,5 @@ int main(){
 	Pop(s,e);
 	Pop(s,e);
 	Pop(s,e);
-
+        system("pause");
 }
