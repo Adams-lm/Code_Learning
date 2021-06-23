@@ -1,0 +1,9 @@
+{
+  "files.defaultLanguage": "cpp", // ctrl+N新建文件后默认的语言
+  "files.associations": {
+    "tidl_alg_int.h": "c",
+    "limits": "c",
+    "stdlib.h": "c",
+    "vector": "cpp"
+  }
+}
