@@ -65,3 +65,70 @@ void delX_2(SqList &L, ElemType x) {
         L.length = L.length - k;
     }
 }
+
+// 题目四：删除有序的顺序表的值【s，t】的元素
+bool Del_s_t2(SqList &L, ElemType s, ElemType t) {
+    int i, j;
+    if (s >= t || L.length == 0) {
+        return false;
+    }
+    for (i = 0; i < L.length && L.data[i] < s; i++)
+        ;  // 寻找值≥s的第一个元素
+    if (i >= L.length) {
+        return false;
+    }
+
+    for (j = i; j < L.length && L.data[i] <= t; j++)
+        ;  // 寻找值>t的第一个元素
+
+    for (; j < L.length; j++) {
+        L.data[i] = L.data[j];
+    }
+    L.length = i;
+    return true;
+}
+
+// 题目五:删除有序的顺序表
+
+bool Del_s_t(SqList &L, ElemType s, ElemType t) {
+    int i, j;
+    if (s >= t || L.length == 0) {
+        return false;
+    }
+    for (size_t i = 0; i < L.length; i++) {
+        if (L.data[i] >= s && L.data[i] <= t)
+            j++;
+        else
+            L.data[i - j] = L.data[i];
+    }
+
+    L.length -= j;
+    return true;
+}
+
+// 题目六：删除相同
+bool delete_Same(SqList &L) {
+    if (L.length == 0) return false;
+    int i, j;
+    for (i = 0, j = 1; j < L.length; j++) {
+        if (L.data[i] != L.data[j]) L.data[++i] = L.data[j];
+    }
+    L.length = i + 1;
+    return true;
+}
+
+// 题目七
+bool Merge(SqList A, SqList B, SqList &C) {
+    if (A.length + B.length > C.length) return false;
+    int i = 0, j = 0, k = 0;
+    while (i < A.length && j < B.length) {
+        if (A.data[i] <= B.data[j])
+            C.data[k++] = A.data[i++];
+        else
+            C.data[k++] = B.data[j++];
+    }
+    while (i < A.length) C.data[k++] = A.data[i++];
+    while (j < B.length) C.data[k++] = B.data[j++];
+    C.length == k;
+    return true;
+}
