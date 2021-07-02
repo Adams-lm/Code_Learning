@@ -17,7 +17,7 @@ void InitStack(SqStack &s) {
     printf("初始化完毕!\n");
 }
 
-bool StackEmpty(SqStack s) { return s.top == -1; }
+bool IsEmpty(SqStack s) { return s.top == -1; }
 
 bool Push(SqStack &s, ElemType x) {
     if (s.top == MaxSize - 1) {
@@ -29,7 +29,7 @@ bool Push(SqStack &s, ElemType x) {
 }
 
 bool Pop(SqStack &s, ElemType &x) {
-    if (StackEmpty(s)) {
+    if (IsEmpty(s)) {
         printf("栈为空\n");
         return false;
     }
@@ -38,7 +38,7 @@ bool Pop(SqStack &s, ElemType &x) {
 }
 
 bool GetTop(SqStack &s, ElemType &x) {
-    if (StackEmpty(s)) {
+    if (IsEmpty(s)) {
         printf("栈为空\n");
         return false;
     }
