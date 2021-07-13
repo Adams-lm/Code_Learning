@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <queue>
 #define ElemType char
 #define ElemType2 BiTree
 #define MaxSize 50
@@ -17,7 +19,7 @@ typedef struct SqStack {
 
 void InitStack(SqStack &s) {
     s.top = -1;
-    printf("初始化完�?!\n");
+    printf("初始化完�?!\n");
 }
 
 bool IsEmpty(SqStack s) { return s.top == -1; }
@@ -68,30 +70,31 @@ void PreOrder(BiTree T) {
     }
 }
 
-int main() {
-    BiTree T, B, C, D, E, F;
-    T = (BiTNode *)malloc(sizeof(BiTNode));
-    B = (BiTNode *)malloc(sizeof(BiTNode));
-    C = (BiTNode *)malloc(sizeof(BiTNode));
-    D = (BiTNode *)malloc(sizeof(BiTNode));
-    E = (BiTNode *)malloc(sizeof(BiTNode));
-    F = (BiTNode *)malloc(sizeof(BiTNode));
+void InOrder(BiTree T) {
+    SqStack S;
+    InitStack(S);
+    BiTree p = T;
+    while (p || !IsEmpty(S)) {
+        if (p) {
+            Push(S, p);
+            p = p->lchild;
+        } else {
+            Pop(S, p);
+            visit(p);
+            p = p->lchild;
+        }
+    }
+}
 
-    T->data = 'A';
-    B->data = 'B';
-    C->data = 'C';
-    D->data = 'D';
-    E->data = 'E';
-    F->data = 'F';
-
-    T->lchild = B;
-    B->lchild = C;
-    C->lchild = D;
-    T->rchild = E;
-    C->rchild = F;
-
-    B->rchild = NULL;
-    D->lchild = NULL;
-
-    PreOrder(T);
+void LevelOrder(BiTree T) {
+    queue<BiTree> Q;
+    BiTree p;
+    Q.push(T);
+    while (!Q.empty()) {
+        p = Q.front();
+        Q.pop();
+        visit(p);
+        if (p->lchild != NULL) Q.push(p->lchild);
+        if (p->rchild != NULL) Q.push(p->rchild);
+    }
 }
